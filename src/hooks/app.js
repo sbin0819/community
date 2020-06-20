@@ -1,31 +1,11 @@
 import * as React from "react";
-import NextApp, { AppProps, AppContext as NextAppContext } from "next/app";
+import NextApp, { AppContext as NextAppContext } from "next/app";
 import { useLocalStore } from "mobx-react-lite";
-import { IAppProps } from "../pages/_app";
 import App from "next/app";
 import cookie from "cookie";
 
-export interface IApp {
-  props: IAppProps;
-  state: IAppState;
-  action: IAppAction;
-}
-
-export type TAppAction = typeof dispatch extends (...args: any[]) => infer R ? R : never;
-export interface IAppAction extends TAppAction { }
-
-export interface IAppState {
-  status: { loading: boolean },
-  user: {
-    id: string,
-    name: string,
-    token: string,
-    level: string
-  }
-}
-
-const initializer = (props: IAppProps) => {
-  const state: IAppState = {
+const initializer = (props) => {
+  const state = {
     status: { loading: false },
     user: {
       id: props.init?.user.id,
@@ -38,7 +18,7 @@ const initializer = (props: IAppProps) => {
   return state;
 };
 
-const dispatch = ($: { state: IAppState }) => {
+const dispatch = ($) => {
   const login = () => {
     $.state.user.token = "";
   };
@@ -53,7 +33,7 @@ const dispatch = ($: { state: IAppState }) => {
   };
 };
 
-const useApp = (props: IAppProps): IApp => {
+const useApp = (props) => {
   const $ = useLocalStore(() => ({ state: initializer(props) }));
 
   const action = dispatch($);
@@ -63,7 +43,7 @@ const useApp = (props: IAppProps): IApp => {
   return app;
 };
 
-App.getInitialProps = async (appContext: NextAppContext) => {
+App.getInitialProps = async (appContext) => {
   const nextAppProps = await NextApp.getInitialProps(appContext);
   const ctx = appContext.ctx;
 

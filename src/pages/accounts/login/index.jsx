@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { useObserver, useLocalStore } from "mobx-react";
+import { useObserver } from "mobx-react";
 import styled from 'styled-components';
 
 import { Form, Input, Button, Checkbox, Row, Col } from 'antd';
@@ -22,11 +22,7 @@ const tailLayout = {
   },
 };
 
-export interface ILoginProps {
-  className?: string;
-}
-
-const Login: React.FC<ILoginProps> = (props) => {
+const Login = (props) => {
   return useObserver(() => {
     const login = useLogin(props);
 

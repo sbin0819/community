@@ -5,15 +5,7 @@ import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
 import { List } from 'antd';
 import IconText from '../_views/IconText/component';
 
-import useBoardList from '../../../hooks/boardList';
-import { TBoardItem } from '../type';
-
-export interface IBoardListProps {
-  className?: string;
-  dataSource: TBoardItem[],
-}
-
-const BoardList: React.FC<IBoardListProps> = (props) => {
+const BoardList = (props) => {
   return useObserver(() => {
     return (
       <List

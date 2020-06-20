@@ -7,19 +7,7 @@ import { useLocalStore } from "mobx-react-lite";
 import { AppContext } from "../components/App/context";
 import { ILoginProps } from "../pages/accounts/login";
 
-
-export type TLogin = typeof useLogin extends (...args: any[]) => infer R ? R : never;
-
-export interface ILoginState {
-  loading: boolean;
-  list: {}[];
-  value: {
-    email: string;
-    password: string;
-  }
-}
-
-const initializer = (props: ILoginProps): ILoginState => {
+const initializer = (props) => {
   return {
     loading: false,
     list: [],
@@ -30,14 +18,14 @@ const initializer = (props: ILoginProps): ILoginState => {
   };
 };
 
-const action = (props: ILoginProps, $: { state: ILoginState }) => {
+const action = (props, $) => {
   const router = useRouter();
   const app = React.useContext(AppContext);
 
   return {};
 };
 
-const useLogin = (props: ILoginProps) => {
+const useLogin = (props) => {
   const app = React.useContext(AppContext);
   const router = useRouter();
 
