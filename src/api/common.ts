@@ -1,23 +1,12 @@
 import axios from "axios";
 
-const AUTH_TOKEN = "";
-const serverURL = "";
-const VERSION = "";
-axios.defaults.baseURL = serverURL + VERSION;
-axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
+const serverURL = "http://13.125.209.154:8081";
+const VERSION = "/v1";
+const baseURL = serverURL + VERSION + "/api";
 
-// const serverURL = "";
-// const serverPath = "";
-
-// export const APIDefault = {
-//   baseURL: serverURL + serverPath,
-//   headers: { "Accept-Language": "ko" }
-// };
-
-// export const instance = axios.create({
-//   baseURL: APIDefault.baseURL,
-//   headers: APIDefault.headers,
-// });
+export const instance = axios.create({
+  baseURL,
+});
 
 
 axios.interceptors.response.use((response) => {

@@ -4,6 +4,7 @@ import { useObserver, useLocalStore } from "mobx-react";
 import styled from 'styled-components';
 
 import { Form, Input, Button, Checkbox, Row, Col } from 'antd';
+import useLogin from '../../../hooks/login';
 
 const layout = {
   labelCol: {
@@ -13,6 +14,7 @@ const layout = {
     span: 16,
   },
 };
+
 const tailLayout = {
   wrapperCol: {
     offset: 8,
@@ -20,18 +22,13 @@ const tailLayout = {
   },
 };
 
-interface Props {
+export interface ILoginProps {
   className?: string;
 }
 
-const Login: React.FC<Props> = (props) => {
+const Login: React.FC<ILoginProps> = (props) => {
   return useObserver(() => {
-    const state = useLocalStore(() => {
-      return {
-        email: "",
-        password: "",
-      };
-    });
+    const login = useLogin(props);
 
     return (
       <div className={props.className}>
@@ -56,15 +53,15 @@ const Login: React.FC<Props> = (props) => {
           >
             <Input
               id="email"
-              value={state.email}
+              value={login.state.value.email}
               onChange={(e) => {
-                state.email = e.target.value;
+                login.state.value.email = e.target.value;
               }}
             />
           </Form.Item>
 
           <Form.Item
-            label="Password"
+            label="비밀번호"
             name="password"
             rules={[
               {
@@ -75,9 +72,9 @@ const Login: React.FC<Props> = (props) => {
           >
             <Input.Password
               id="password"
-              value={state.password}
+              value={login.state.value.password}
               onChange={(e) => {
-                state.password = e.target.value;
+                login.state.value.password = e.target.value;
               }}
             />
           </Form.Item>
@@ -88,8 +85,8 @@ const Login: React.FC<Props> = (props) => {
 
           <Form.Item {...tailLayout}>
             <Button type="primary" htmlType="submit" onClick={() => {
-              console.log("email : ", state.email);
-              console.log("password : ", state.password);
+              console.log("email : ", login.state.value.email);
+              console.log("password : ", login.state.value.password);
             }}>로그인</Button>
           </Form.Item>
 
@@ -112,23 +109,10 @@ const Login: React.FC<Props> = (props) => {
 
 export default styled(Login)`
   & {
-    .wrap {
-      margin: 200px auto;
-      width: 460px;
-    }
-
     .center {
       display: flex;
       align-items: center;
       justify-content: center;
-    }
-
-    .signup_txt {
-      text-align: center;
-    }
-
-    .lostpw_txt {
-      text-align: center;
     }
 
     .login_logo {

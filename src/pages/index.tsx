@@ -12,7 +12,7 @@ const Home: React.FC<Props> = (props) => {
     return (
       <div className={props.className}>
         home
-        <Button onClick={() => { router.push("/list"); }} >게시판</Button>
+        <Button onClick={() => { router.push("/board"); }} >게시판</Button>
         <Button onClick={() => { router.push("/accounts/login"); }}>로그인</Button>
       </div >
     )

@@ -1,4 +1,4 @@
-import boardListBroker from "./board/list";
+import boardListBroker from "./board/page";
 
 export type TBrokerAction = (payload: any, options?: any) => Promise<{ data?: any }>;
 

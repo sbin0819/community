@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Layout, Menu, Breadcrumb } from 'antd';
+import { Layout, Menu, Breadcrumb, Badge } from 'antd';
 import { useRouter } from 'next/router';
 const { Header, Content, Footer } = Layout;
 
@@ -14,7 +14,7 @@ const route = [
   },
   {
     title: "게시판",
-    url: "/list",
+    url: "/board",
   }, {
     title: "로그인",
     url: "/accounts/login",
@@ -35,6 +35,23 @@ const LayoutComponent: React.FC<ILayoutPros> = (props) => {
         <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
           {route.map((i) => <Menu.Item key={i.url} onClick={() => { router.push(i.url) }}>{i.title}</Menu.Item>)}
         </Menu>
+        {/* <ul className="menu-alert-icon">
+          <li>
+            <Badge count={99}>
+              <a href="#" className="head-example" />
+            </Badge>
+          </li>
+          <li>
+            <Badge count={99}>
+              <a href="#" className="head-example" />
+            </Badge>
+          </li>
+          <li>
+            <Badge count={99}>
+              <a href="#" className="head-example" />
+            </Badge>
+          </li>
+        </ul> */}
       </Header>
       <Content style={{ padding: '0 50px' }}>
         <Breadcrumb style={{ margin: '16px 0' }}>

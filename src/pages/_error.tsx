@@ -1,5 +1,4 @@
 import * as React from "react";
-
 import styled from "styled-components";
 
 const _HomeButton: React.FunctionComponent<{ className?: string; onClick: () => void }> = (props) => {

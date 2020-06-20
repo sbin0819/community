@@ -5,8 +5,7 @@ import { useRouter, NextRouter } from "next/router";
 
 import { useLocalStore } from "mobx-react-lite";
 import { AppContext } from "../components/App/context";
-import { IBoardListProps } from "../pages/list";
-
+import { IBoardListProps } from "../components/Board/List";
 
 export type TBoardList = typeof useBoardList extends (...args: any[]) => infer R ? R : never;
 
@@ -35,6 +34,8 @@ const useBoardList = (props: IBoardListProps) => {
 
   const $ = useLocalStore(() => ({ state: initializer(props) }));
   const dispatch = action(props, $);
+
+  return { state: $.state, dispatch };
 }
 
 export default useBoardList;
