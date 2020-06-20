@@ -11,7 +11,7 @@ export const instance = axios.create({
 
 axios.interceptors.response.use((response) => {
   return response;
-}), (error: any) => {
+}), (error) => {
   switch (error.response.status) {
     case 401:
       // 로그인이 필요합니다.

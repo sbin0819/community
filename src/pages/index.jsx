@@ -2,10 +2,8 @@ import styled from 'styled-components';
 import { useObserver } from 'mobx-react';
 import { useRouter } from 'next/router';
 import { Button } from 'antd';
-interface Props {
-  className?: string;
-}
-const Home: React.FC<Props> = (props) => {
+
+const Home = (props) => {
   return useObserver(() => {
     const router = useRouter();
 

@@ -3,14 +3,30 @@ import { Layout, Menu, Breadcrumb, Badge } from 'antd';
 import { useRouter } from 'next/router';
 const { Header, Content, Footer } = Layout;
 
-interface ILayoutPros {
-  className?: string;
-}
-
 const route = [
   {
     title: "Home",
     url: "/",
+  },
+  {
+    title: "Q&A",
+    url: "/QnA",
+  },
+  {
+    title: "Tech",
+    url: "/tech",
+  },
+  {
+    title: "커뮤니티",
+    url: "/community",
+  },
+  {
+    title: "칼럼",
+    url: "/columns",
+  },
+  {
+    title: "Job",
+    url: "/job",
   },
   {
     title: "게시판",
@@ -22,11 +38,9 @@ const route = [
 ];
 
 
-const LayoutComponent: React.FC<ILayoutPros> = (props) => {
+const LayoutComponent = (props) => {
   const router = useRouter();
-
   const routerAsPath = router.asPath.split("/");
-
 
   return (
     <Layout className={props.className}>
@@ -55,7 +69,7 @@ const LayoutComponent: React.FC<ILayoutPros> = (props) => {
       </Header>
       <Content style={{ padding: '0 50px' }}>
         <Breadcrumb style={{ margin: '16px 0' }}>
-          {routerAsPath.map((d) => <Breadcrumb.Item>{d}</Breadcrumb.Item>)}
+          {routerAsPath.map((d, k) => <Breadcrumb.Item key={k}>{d}</Breadcrumb.Item>)}
         </Breadcrumb>
         {props.children}
       </Content>
