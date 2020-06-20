@@ -3,58 +3,105 @@ import Link from 'next/link'
 import { useObserver, useLocalStore } from "mobx-react";
 import styled from 'styled-components';
 
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import { Form, Input, Button, Checkbox, Row, Col } from 'antd';
+import useLogin from '../../../hooks/login';
 
-interface Props {
+const layout = {
+  labelCol: {
+    span: 8,
+  },
+  wrapperCol: {
+    span: 16,
+  },
+};
+
+const tailLayout = {
+  wrapperCol: {
+    offset: 8,
+    span: 16,
+  },
+};
+
+export interface ILoginProps {
   className?: string;
 }
 
-const Login: React.FC<Props> = (props) => {
+const Login: React.FC<ILoginProps> = (props) => {
   return useObserver(() => {
-    const state = useLocalStore(() => {
-      return {
-        email: "",
-        password: "",
-      };
-    });
+    const login = useLogin(props);
 
     return (
       <div className={props.className}>
-        <div className="wrap">
-          <Form>
-            <Form.Group controlId="formBasicEmail">
-              <Form.Control type="email" placeholder="이메일을 입력해주세요" />
-            </Form.Group>
+        <Form
+          {...layout}
+          name="basic"
+          initialValues={{
+            remember: true,
+          }}
+          onFinish={() => { console.log("finish") }}
+          onFinishFailed={() => { console.log("onFinishFailed") }}
+        >
+          <Form.Item
+            label="아이디"
+            name="email"
+            rules={[
+              {
+                required: true,
+                message: '이메일을 입력해주세요.',
+              },
+            ]}
+          >
+            <Input
+              id="email"
+              value={login.state.value.email}
+              onChange={(e) => {
+                login.state.value.email = e.target.value;
+              }}
+            />
+          </Form.Item>
 
-            <Form.Group controlId="formBasicPassword">
-              <Form.Control type="password" placeholder="비밀번호를 입력해주세요" />
-            </Form.Group>
+          <Form.Item
+            label="비밀번호"
+            name="password"
+            rules={[
+              {
+                required: true,
+                message: '비밀번호를 입력해주세요.',
+              },
+            ]}
+          >
+            <Input.Password
+              id="password"
+              value={login.state.value.password}
+              onChange={(e) => {
+                login.state.value.password = e.target.value;
+              }}
+            />
+          </Form.Item>
 
-            <Form.Group controlId="formBasicCheckbox">
-              <Form.Check type="checkbox" label="로그인 유지" />
-            </Form.Group>
-            <Button variant="primary" block onClick={() => {
-              console.log("email :", state.email);
-              console.log("password : ", state.password);
-            }}>
-              로그인
-            </Button>
-            <Row>
-              <Col className="signup_txt">계정이 없으신가요? <Link href="signup"><a>회원가입</a></Link></Col>
-            </Row>
-            <Row>
-              <Col className="lostpw_txt"><Link href="password/reset"><a>비밀번호를 잊으셨나요?</a></Link></Col>
-            </Row>
-            <Row>
-              <Col><div className="login_logo">F</div></Col>
-              <Col><div className="login_logo">g</div></Col>
-              <Col><div className="login_logo">N</div></Col>
-            </Row>
-          </Form>
-        </div>
+          <Form.Item {...tailLayout} name="remember" valuePropName="checked">
+            <Checkbox>로그인 유지</Checkbox>
+          </Form.Item>
+
+          <Form.Item {...tailLayout}>
+            <Button type="primary" htmlType="submit" onClick={() => {
+              console.log("email : ", login.state.value.email);
+              console.log("password : ", login.state.value.password);
+            }}>로그인</Button>
+          </Form.Item>
+
+          <Row className="center">
+            <Col className="signup_txt">계정이 없으신가요? <Link href="signup"><a>회원가입</a></Link></Col>
+          </Row>
+          <Row className="center">
+            <Col className="lostpw_txt"><Link href="password/reset"><a>비밀번호를 잊으셨나요?</a></Link></Col>
+          </Row>
+          <Row className="center">
+            <Col><div className="login_logo">F</div></Col>
+            <Col><div className="login_logo">g</div></Col>
+            <Col><div className="login_logo">N</div></Col>
+          </Row>
+        </Form>
       </div>
     );
   });
@@ -62,17 +109,10 @@ const Login: React.FC<Props> = (props) => {
 
 export default styled(Login)`
   & {
-    .wrap {
-      margin: 200px auto;
-      width: 460px;
-    }
-
-    .signup_txt {
-      text-align: center;
-    }
-
-    .lostpw_txt {
-      text-align: center;
+    .center {
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .login_logo {

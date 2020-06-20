@@ -1,8 +1,7 @@
 import styled from 'styled-components';
-import Button from 'react-bootstrap/Button';
 import { useObserver } from 'mobx-react';
 import { useRouter } from 'next/router';
-
+import { Button } from 'antd';
 interface Props {
   className?: string;
 }
@@ -13,15 +12,15 @@ const Home: React.FC<Props> = (props) => {
     return (
       <div className={props.className}>
         home
-        <Button onClick={() => { router.push("/accounts/login"); }}>login</Button>
-      </div>
+        <Button onClick={() => { router.push("/board"); }} >게시판</Button>
+        <Button onClick={() => { router.push("/accounts/login"); }}>로그인</Button>
+      </div >
     )
   });
 }
 
 export default styled(Home)`
   & { 
-    min-height: 100vh;
     padding: 0 0.5rem;
     display: flex;
     flex-direction: column;
