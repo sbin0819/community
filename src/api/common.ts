@@ -25,7 +25,7 @@ axios.interceptors.response.use((response) => {
 }), (error: any) => {
   switch (error.response.status) {
     case 401:
-      // 권한 없음
+      // 로그인이 필요합니다.
       break;
     case 403:
       // 권한 없음

@@ -1,9 +1,11 @@
+import React from 'react';
 import styled from 'styled-components';
 import { GetStaticProps } from 'next';
-import { useObserver, useLocalStore } from 'mobx-react';
-import { Table, Pagination } from 'antd';
+import { useObserver } from 'mobx-react';
+import { List, Space } from 'antd';
+import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
 
-interface IBoardListProps {
+export interface IBoardListProps {
   className?: string;
   data: {
     dataSource: BoardItem[],
@@ -20,63 +22,67 @@ interface BoardItem {
   commentCnt: number,
 }
 
+const listData = [];
+for (let i = 0; i < 23; i++) {
+  listData.push({
+    href: `/list/${i}`,
+    title: `${i} 제목입니다. `,
+    description:
+      '내용',
+    likeCnt: i,
+    commentCnt: i,
+    writer: "작성자",
+  });
+}
+
+const IconText = ({ icon, text }) => (
+  <Space>
+    {React.createElement(icon)}
+    {text}
+  </Space>
+);
+
 const BoardList: React.FC<IBoardListProps> = (props) => {
   return useObserver(() => {
-
     return (
       <div className={props.className}>
         {/* 검색바 */}
-        <Table<BoardItem> dataSource={props.data.dataSource} columns={props.data.columns} />
+        <List
+          itemLayout="vertical"
+          size="large"
+          pagination={{
+            onChange: page => {
+              console.log(page);
+            },
+            pageSize: 3,
+
+          }}
+          dataSource={listData}
+          renderItem={item => (
+            <List.Item
+              key={item.title}
+              actions={[
+                <IconText icon={StarOutlined} text="156" key="list-vertical-star-o" />,
+                <IconText icon={LikeOutlined} text={item.likeCnt} key="list-vertical-like-o" />,
+                <IconText icon={MessageOutlined} text="2" key="list-vertical-message" />,
+              ]}
+            >
+              <List.Item.Meta
+                title={<a href={item.href}>{item.title}</a>}
+                description={item.description}
+              />
+              {item.content}
+            </List.Item>
+          )}
+        />
       </div>
     );
   });
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const columns = [{
-    key: "title",
-    title: "제목",
-    dataIndex: "title",
-  }, {
-    key: "writer",
-    title: "작성자",
-    dateIndex: "writer",
-  }, {
-    key: "likeCnt",
-    title: "좋아요",
-    dateIndex: "likeCnt",
-  }, {
-    key: "viewCnt",
-    title: "조회수",
-    dateIndex: "viewCnt",
-  }, {
-    title: "댓글수",
-    dateIndex: "commentCnt",
-    key: "commentCnt",
-  }];
-
-  const dataSource: BoardItem[] = [{
-    key: "1",
-    title: "제목",
-    writer: "작성자",
-    likeCnt: 1,
-    viewCnt: 1,
-    commentCnt: 1,
-  }, {
-    key: "2",
-    title: "제목",
-    writer: "작성자",
-    likeCnt: 1,
-    viewCnt: 1,
-    commentCnt: 1,
-  }, {
-    key: "3",
-    title: "제목",
-    writer: "작성자",
-    likeCnt: 1,
-    viewCnt: 1,
-    commentCnt: 1,
-  }];
+  const columns = [];
+  const dataSource: BoardItem[] = [];
 
   return {
     props: {

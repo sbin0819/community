@@ -34,29 +34,6 @@ const HomeButton = styled(_HomeButton)`
   path { stroke: #006ee5; }
 `;
 
-const _ErrorIndicator: React.FunctionComponent<{ className?: string; }> = (props) => {
-  return (
-    <div className={props.className}>
-
-    </div>
-  );
-};
-
-const ErrorIndicator = styled(_ErrorIndicator)`
-  position: relative;
-
-  width: 600px;
-  padding-bottom: 400px;
-
-  svg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-`;
-
 export interface IErrorPageProps {
   className?: string;
 }
@@ -78,7 +55,7 @@ class ErrorPage extends React.Component<IErrorPageProps> {
   public render() {
     return (
       <div className={this.props.className}>
-        <ErrorIndicator className="indicator" />
+        <p>ERROR</p>
         <HomeButton onClick={() => location.replace("/")} />
       </div>
     );
@@ -87,20 +64,15 @@ class ErrorPage extends React.Component<IErrorPageProps> {
 
 export default styled(ErrorPage)`
   width: 100%;
-  height: 100%;
+  height: 100vh;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
-  .indicator {
-    @media (max-width: 720px) {
-      width: 120%;
-      padding-bottom: 80%;
-    }
-
-    width: 600px;
-    padding-bottom: 400px;
+  > p {
+    font-size: 100px;
+    font-weight: bold;
   }
 `;

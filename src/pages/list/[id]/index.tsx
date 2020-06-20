@@ -49,11 +49,12 @@ const Board: React.FC<IBoardProps> = (props) => {
 
     return (
       <div className="">
+        게시판
         {/* 검색바 */}
         {/* 리스트 */}
-        <Table dataSource={state.dataSource} columns={state.columns} />
+        {/* <Table dataSource={state.dataSource} columns={state.columns} /> */}
         {/* 페이지네이션 */}
-        <Pagination defaultCurrent={state.page.current} total={state.page.total} />
+        {/* <Pagination defaultCurrent={state.page.current} total={state.page.total} /> */}
       </div>
     );
   });
