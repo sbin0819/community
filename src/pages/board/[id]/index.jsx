@@ -3,11 +3,7 @@ import { GetStaticPaths } from 'next';
 import { Pagination, Table } from 'antd';
 import { useObserver, useLocalStore } from 'mobx-react';
 
-interface IBoardProps {
-  className?: string;
-}
-
-const Board: React.FC<IBoardProps> = (props) => {
+const Board = (props) => {
   return useObserver(() => {
     const state = useLocalStore(() => {
       return {

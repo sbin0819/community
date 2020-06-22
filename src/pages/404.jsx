@@ -3,3 +3,5 @@ function NotFound() {
     <div>ERROR</div>
   );
 };
+
+export default NotFound;
