@@ -5,10 +5,7 @@ const boardListBroker = {
   async read(payload) {
     try {
       const res = await instance.get(this.url + `&title=${payload.title}`);
-      console.log("res : ", res);
-      const data = {};
-
-      return data;
+      return res;
     } catch (error) {
       throw error;
     }
