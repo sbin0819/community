@@ -3,3 +3,8 @@ function NotFound() {
     <div>ERROR</div>
   );
 };
+<<<<<<< HEAD
+=======
+
+export default NotFound;
+>>>>>>> upstream/develop
