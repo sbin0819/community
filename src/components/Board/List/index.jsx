@@ -9,7 +9,7 @@ const BoardList = (props) => {
   return useObserver(() => {
     return (
       <List
-        loading={false}
+        loading={props.loading}
         itemLayout="vertical"
         size="large"
         pagination={{

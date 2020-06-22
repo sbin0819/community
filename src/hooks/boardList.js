@@ -28,6 +28,10 @@ const useBoardList = (props) => {
   const $ = useLocalStore(() => ({ state: initializer(props) }));
   const dispatch = action(props, $);
 
+  React.useEffect(() => {
+
+  });
+
   return { state: $.state, dispatch };
 }
 
