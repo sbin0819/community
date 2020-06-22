@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { Layout, Menu, Breadcrumb, Badge } from 'antd';
 import { useRouter } from 'next/router';
 const { Header, Content, Footer } = Layout;
+import { MessageOutlined, BellOutlined, UserOutlined } from '@ant-design/icons';
 
 const route = [
   {
@@ -42,30 +43,36 @@ const LayoutComponent = (props) => {
   const router = useRouter();
   const routerAsPath = router.asPath.split("/");
 
+  const cnt = {
+    commentNotReadCnt: 1,
+    boardNotReadCnt: 2,
+    followNotReadCnt: 3,
+  };
+
   return (
     <Layout className={props.className}>
-      <Header>
+      <Header className="header">
         <div className="logo" />
-        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
+        <Menu className="main-menu" theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
           {route.map((i) => <Menu.Item key={i.url} onClick={() => { router.push(i.url) }}>{i.title}</Menu.Item>)}
         </Menu>
-        {/* <ul className="menu-alert-icon">
-          <li>
-            <Badge count={99}>
-              <a href="#" className="head-example" />
+        <Menu className="alert-menu" theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
+          <Menu.Item onClick={() => { }}>
+            <Badge count={cnt.commentNotReadCnt}>
+              <a href="#" className="head-example" ><MessageOutlined /></a>
             </Badge>
-          </li>
-          <li>
-            <Badge count={99}>
-              <a href="#" className="head-example" />
+          </Menu.Item>
+          <Menu.Item onClick={() => { }}>
+            <Badge count={cnt.boardNotReadCnt}>
+              <a href="#" className="head-example" ><BellOutlined /></a>
             </Badge>
-          </li>
-          <li>
-            <Badge count={99}>
-              <a href="#" className="head-example" />
+          </Menu.Item>
+          <Menu.Item onClick={() => { }}>
+            <Badge count={cnt.followNotReadCnt}>
+              <a href="#" className="head-example" ><UserOutlined /></a>
             </Badge>
-          </li>
-        </ul> */}
+          </Menu.Item>
+        </Menu>
       </Header>
       <Content style={{ padding: '0 50px' }}>
         <Breadcrumb style={{ margin: '16px 0' }}>
@@ -79,4 +86,13 @@ const LayoutComponent = (props) => {
 }
 
 export default styled(LayoutComponent)`
+  & {
+    .header {
+      display: flex;
+      
+      .logo { flex-shrink: 0;}
+      .main-menu { flex-shrink: 1; width: 100%; }
+      .alert-menu { flex-shrink: 0; }
+    }
+  }
 `;
