@@ -1,43 +1,13 @@
-import styled from 'styled-components';
-import { Layout, Menu, Breadcrumb, Badge } from 'antd';
 import { useRouter } from 'next/router';
+
+import styled from 'styled-components';
+
+import routes from '../../routes';
+
+import { Layout, Menu, Breadcrumb, Badge } from 'antd';
 const { Header, Content, Footer } = Layout;
+
 import { MessageOutlined, BellOutlined, UserOutlined } from '@ant-design/icons';
-
-const route = [
-  {
-    title: "Home",
-    url: "/",
-  },
-  {
-    title: "Q&A",
-    url: "/QnA",
-  },
-  {
-    title: "Tech",
-    url: "/tech",
-  },
-  {
-    title: "커뮤니티",
-    url: "/community",
-  },
-  {
-    title: "칼럼",
-    url: "/columns",
-  },
-  {
-    title: "Job",
-    url: "/job",
-  },
-  {
-    title: "게시판",
-    url: "/board",
-  }, {
-    title: "로그인",
-    url: "/accounts/login",
-  }
-];
-
 
 const LayoutComponent = (props) => {
   const router = useRouter();
@@ -54,7 +24,7 @@ const LayoutComponent = (props) => {
       <Header className="header">
         <div className="logo" />
         <Menu className="main-menu" theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
-          {route.map((i) => <Menu.Item key={i.url} onClick={() => { router.push(i.url) }}>{i.title}</Menu.Item>)}
+          {routes.map((i) => <Menu.Item key={i.url} onClick={() => { router.push(i.url) }}>{i.title}</Menu.Item>)}
         </Menu>
         <Menu className="alert-menu" theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
           <Menu.Item onClick={() => { }}>
