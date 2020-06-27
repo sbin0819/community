@@ -24,7 +24,8 @@ const LayoutComponent = (props) => {
       <Header className="header">
         <div className="logo" />
         <Menu className="main-menu" theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
-          {routes.map((i) => <Menu.Item key={i.url} onClick={() => { router.push(i.url) }}>{i.title}</Menu.Item>)}
+          {console.log("menu : ", JSON.stringify(routes, null, 3))}
+          {routes.map((i) => <Menu.Item key={i.url} onClick={() => { router.push(i.url) }}>{i.name}</Menu.Item>)}
         </Menu>
         <Menu className="alert-menu" theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
           <Menu.Item onClick={() => { }}>
