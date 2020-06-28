@@ -7,5 +7,5 @@ yarn install
 
 #### 시작
 ```
-yarn run dev
+yarn dev
 ```
