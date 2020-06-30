@@ -6,30 +6,30 @@ import styled from 'styled-components';
 import { Form, Input, Button, Checkbox, Row, Col } from 'antd';
 import useLogin from '../../../hooks/login';
 
-const layout = {
-  labelCol: {
-    span: 8,
-  },
-  wrapperCol: {
-    span: 16,
-  },
-};
+// const layout = {
+//   labelCol: {
+//     span: 8,
+//   },
+//   wrapperCol: {
+//     span: 16,
+//   },
+// };
 
-const tailLayout = {
-  wrapperCol: {
-    offset: 8,
-    span: 16,
-  },
-};
+// const tailLayout = {
+//   wrapperCol: {
+//     offset: 8,
+//     span: 16,
+//   },
+// };
 
 const Login = (props) => {
   return useObserver(() => {
     const login = useLogin(props);
-
     return (
       <div className={props.className}>
+        <h1 className='title'>LOGO</h1>
+
         <Form
-          {...layout}
           name="basic"
           initialValues={{
             remember: true,
@@ -37,55 +37,56 @@ const Login = (props) => {
           onFinish={() => { console.log("finish") }}
           onFinishFailed={() => { console.log("onFinishFailed") }}
         >
-          <Form.Item
-            label="아이디"
-            name="email"
-            rules={[
-              {
-                required: true,
-                message: '이메일을 입력해주세요.',
-              },
-            ]}
-          >
-            <Input
-              id="email"
-              value={login.state.value.email}
-              onChange={(e) => {
-                login.state.value.email = e.target.value;
-              }}
-            />
-          </Form.Item>
+          <div className='wrapper'>
+            <Form.Item
+              className="center"
+              name="email"
+              rules={[
+                {
+                  required: true,
+                  message: '이메일을 입력해주세요.',
+                },
+              ]}
+            >
+              <Input
+                className="input"
+                id="email"
+                value={login.state.value.email}
+                onChange={(e) => {
+                  login.state.value.email = e.target.value;
+                }}
+              />
+            </Form.Item>
+            <Form.Item
+              className="center"
+              name="password"
+              rules={[
+                {
+                  required: true,
+                  message: '비밀번호를 입력해주세요.',
+                },
+              ]}
+            >
+              <Input.Password
+                className="input"
+                id="password"
+                value={login.state.value.password}
+                onChange={(e) => {
+                  login.state.value.password = e.target.value;
+                }}
+              />
+            </Form.Item>
+            <Form.Item name="remember" valuePropName="checked">
+              <Checkbox >로그인 유지</Checkbox>
+            </Form.Item>
 
-          <Form.Item
-            label="비밀번호"
-            name="password"
-            rules={[
-              {
-                required: true,
-                message: '비밀번호를 입력해주세요.',
-              },
-            ]}
-          >
-            <Input.Password
-              id="password"
-              value={login.state.value.password}
-              onChange={(e) => {
-                login.state.value.password = e.target.value;
-              }}
-            />
-          </Form.Item>
-
-          <Form.Item {...tailLayout} name="remember" valuePropName="checked">
-            <Checkbox>로그인 유지</Checkbox>
-          </Form.Item>
-
-          <Form.Item {...tailLayout}>
-            <Button type="primary" htmlType="submit" onClick={() => {
-              console.log("email : ", login.state.value.email);
-              console.log("password : ", login.state.value.password);
-            }}>로그인</Button>
-          </Form.Item>
-
+            <Form.Item className='test' >
+              <Button className='button' type="primary" htmlType="submit" onClick={() => {
+                console.log("email : ", login.state.value.email);
+                console.log("password : ", login.state.value.password);
+              }}>로그인</Button>
+            </Form.Item>
+          </div>
           <Row className="center">
             <Col className="signup_txt">계정이 없으신가요? <Link href="signup"><a>회원가입</a></Link></Col>
           </Row>
@@ -105,6 +106,30 @@ const Login = (props) => {
 
 export default styled(Login)`
   & {
+    /* text-align: center; */
+    .title{
+      font-size: 2.3rem;
+      text-align: center;
+      margin-bottom: 100px;
+    }
+
+    .wrapper {
+      margin: 15px auto;
+      width: 300px;
+      .input{
+        height: 40px;
+      }
+    }
+
+    .button{
+      width: 100%;
+      height: 40px
+    }
+
+    .test{
+      background-color: gold;
+    }
+
     .center {
       display: flex;
       align-items: center;
