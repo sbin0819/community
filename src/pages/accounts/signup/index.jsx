@@ -93,7 +93,7 @@ export default styled(Signup)`
     .title{
       font-size: 2.3rem;
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 80px;
     }
     .wrapper {
       margin: 15px auto;
