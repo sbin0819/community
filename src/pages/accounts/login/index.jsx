@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import Link from 'next/link'
 
 import { useObserver } from "mobx-react";
@@ -62,7 +61,6 @@ const Login = (props) => {
                 }}
               />
             </Form.Item>
-
             <Form.Item name="remember" valuePropName="checked">
               <Checkbox >로그인 유지</Checkbox>
             </Form.Item>
@@ -75,18 +73,16 @@ const Login = (props) => {
             </Form.Item>
           </div>
           <Row className="center">
-            <Col className="signup-txt">
-              <span>계정이 없으신가요?</span>
-              <Link href="signup"><a>회원가입</a></Link></Col>
+            <Col className="signup_txt">계정이 없으신가요? <Link href="signup"><a>회원가입</a></Link></Col>
           </Row>
           <Row className="center">
-            <Col className="lostpw-txt"><Link href="password/reset"><a>비밀번호를 잊으셨나요?</a></Link></Col>
+            <Col className="lostpw_txt"><Link href="password/reset"><a>비밀번호를 잊으셨나요?</a></Link></Col>
           </Row>
-          <Row className="center">
+          {/* <Row className="center">
             <Col><div className="login_logo">F</div></Col>
             <Col><div className="login_logo">g</div></Col>
             <Col><div className="login_logo">N</div></Col>
-          </Row>
+          </Row> */}
         </Form>
       </div>
     );
@@ -97,14 +93,12 @@ export default styled(Login)`
   & {
     height: 75vh;
     overflow: scroll;
-     a {
-      text-decoration: underline;
-    }
     .title{
       font-size: 2.3rem;
       text-align: center;
-      margin-bottom: 70px;
+      margin-bottom: 100px;
     }
+
     .wrapper {
       margin: 15px auto;
       width: 300px;
@@ -112,22 +106,19 @@ export default styled(Login)`
         height: 40px;
       }
     }
+
+    .button{
+      width: 100%;
+      height: 40px
+    }
+
     .center {
       display: flex;
       align-items: center;
       justify-content: center;
     }
-    .button{
-      width: 100%;
-      height: 40px
-    }
-    .signup-txt {
-      margin-bottom: 8px;
-    span{
-      margin-right: 10px;
-    }
-   }
-   .login_logo {
+
+    .login_logo {
       display: flex;
       justify-content: center;
       align-items: center;
